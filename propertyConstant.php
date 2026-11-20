@@ -1,22 +1,64 @@
 <?php
+namespace Pbo\Marketplace; 
 
 class produk {
 
       //property
-      public string $kode; 
-      public string $nama;
-      public int $harga;
-      public int $stok;
+      private string $kode; 
+      private string $nama;
+      private int $harga;
+      private int $stok;
 
 
      //constant(tetap)
      public const PAJAK = 0.11;  
 
-     public function __construct($kode, $nama, $harga, $stok) {
-         $this->kode = $kode;
-         $this->nama = $nama;
-         $this->harga = $harga; 
-         $this->stok = $stok;
+     public function __construct() {
+         
+     }
+     
+     //setter
+     public function setKode($kode) {
+          $this->kode = $kode; 
+          return $this;
+     }
+
+     public function setNama($nama) {
+          $this->nama = $nama; 
+          return $this;
+     }
+
+     public function setHarga($harga) {
+          if ($harga < 0) {
+               echo "Harga tidak boleh 0";
+          }
+          $this->harga = $harga; 
+          return $this;
+     }
+
+     public function setStok($stok) {
+          if ($stok < 0) {
+               echo "Stok tidak boleh 0";
+          }
+          $this->stok = $stok; 
+          return $this;
+     }
+
+     //getter
+     public function getKode() {
+          return $this->kode; 
+     }
+
+     public function getNama() {
+          return $this->nama; 
+     }
+
+     public function getHarga() {
+          return $this->harga; 
+     }
+
+     public function getStok() {
+          return $this->stok; 
      }
 
      public function pajak() {
@@ -27,27 +69,3 @@ class produk {
           return $this->harga + ($this->harga * self::PAJAK);
      }
 }
-
-//object
-$produk = new produk('S1113AX', 'Laptop', 10000000, 5); 
-
-//hasil
-echo "produk : ". $produk->nama; 
-echo "<br/>";
-echo "<br/>";
-
-echo "harga: RP.". $produk->harga ;
-echo "<br/>";
-echo "<br/>";
-
-echo "stok : ". $produk->stok;
-echo "<br/>";
-echo "<br/>";
-
-echo "pajak : ". $produk->pajak(). "%";
-echo "<br/>";
-echo "<br/>";
-
-echo "total harga setelah : RP". $produk->total(); 
-echo "<br/>";
-echo "<br/>";
